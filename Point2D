@@ -1,0 +1,62 @@
+
+public class Point2D {
+    private double current_x;
+    private double current_y;
+    private boolean warp;
+
+    public Point2D(double x, double y) {
+        current_x = x;
+        current_y = y;
+        warp = false;
+    }
+
+    public void increment_x(int step) {
+        if (!warp) {
+            current_x += step;
+        } else
+            current_x -= step;
+    }
+
+    public void increment_y(int step) {
+        if (!warp) {
+            current_y += step;
+        } else
+            current_y -= step;
+    }
+
+    public void reverse() {
+        warp = !warp;
+    }
+
+    public String toString() {
+        return "(" + current_x + " ;" + current_y + ")";
+    }
+
+    public static void main(String[] args) {
+        double x = Double.parseDouble(args[0]);
+        double y = Double.parseDouble(args[1]);
+        Point2D point = new Point2D(x, y);
+ 
+        for (int i = 0; i < args[2].length(); i++) {
+            switch (args[2].charAt(i)) {
+            case '~':
+                point.reverse();
+                break;
+            case '>':
+                point.increment_x(1);
+                break;
+            case '<':
+                point.increment_x(-1);
+                break;
+            case '^':
+                point.increment_y(-1);
+                break;
+            case 'v':
+                point.increment_y(1);
+                break;
+            }
+        }
+        System.out.println(point);
+
+    }
+}
